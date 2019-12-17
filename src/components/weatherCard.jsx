@@ -2,12 +2,14 @@ import React from 'react';
 import cloudyImg from 'img/cloud.png'
 import dropsImg from 'img/drops.png'
 import sunImg from 'img/sun.png'
+import { Link } from "react-router-dom";
 
 
 const styles = {
     card: {
         maxWidth: "5rem",
-        border: "1px solid #dddddd"
+        border: "1px solid #dddddd",
+        textAlign: 'center'
     },
     cardHeader: {
         textAlign: "center",
@@ -43,17 +45,19 @@ class WeatherCard extends React.Component {
         let imgIcon = imgMap[this.props.weather.toLowerCase()];
 
         return (
-            <div onClick={this.props.onClick} style={styles.card}>
-                <div>
-                    <div style={styles.cardHeader}>{this.props.day}</div>
-                    <img src={imgIcon != null ? imgIcon : sunImg}></img>
+            <Link to={`/day?date=${this.props.day}`} style={{ textDecoration: 'none', color: 'black' }}>
+                <div style={styles.card}>
+                    <div onClick={this.hello}>
+                        <div style={styles.cardHeader}>{this.props.day}</div>
+                        <img style={styles.image} src={imgIcon != null ? imgIcon : sunImg}></img>
 
-                    <div style={styles.tempRow}>
-                        <div style={styles.h6Style}>{Math.round(this.props.high) + String.fromCharCode(176)}</div>
-                        <div style={styles.h6Style}>{Math.round(this.props.low) + String.fromCharCode(176)}</div>
+                        <div style={styles.tempRow}>
+                            <div style={styles.h6Style}>{Math.round(this.props.high) + String.fromCharCode(176)}</div>
+                            <div style={styles.h6Style}>{Math.round(this.props.low) + String.fromCharCode(176)}</div>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </Link>
         )
     }
 }
